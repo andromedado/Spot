@@ -24,6 +24,38 @@ module Spot
       Player.shipit
     end
 
+    get '/shipit-adminv1' do
+      Player.shipitadminv1
+    end
+
+    get '/shipit-adminv2' do
+      Player.shipitadminv2
+    end
+
+    get '/shipit-inventory' do
+      Player.shipitinventory
+    end
+
+    get '/shipit-identity' do
+      Player.shipitidentity
+    end
+
+    get '/shipit-ecom' do
+      Player.shipitecom
+    end
+
+    get '/shipit-cms' do
+      Player.shipitcms
+    end
+
+    get '/shipit-usercomm' do
+      Player.shipitusercomm
+    end
+
+    get '/shipit-query' do
+      Player.shipitquery
+    end
+
     put '/play' do
       Player.volume = 45
       Player.play
