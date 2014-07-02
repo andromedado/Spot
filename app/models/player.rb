@@ -107,5 +107,9 @@ module Spot
       `open /Users/admin/bigboard/query-release.app`
     end
 
+    def self.dale
+      `open /Users/admin/bigboard/damnitdale.app`
+    end
+
   end
 end

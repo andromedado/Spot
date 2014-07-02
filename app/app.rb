@@ -56,6 +56,10 @@ module Spot
       Player.shipitquery
     end
 
+    get '/damnit-dale' do
+      Player.dale
+    end
+
     put '/play' do
       Player.volume = 45
       Player.play
