@@ -187,6 +187,12 @@ module Spot
       send_file img, :disposition => 'inline'
     end
 
+    get '/now/playing' do
+      content_type 'image/png'
+      img = Player.artwork
+      send_file img, :disposition => 'inline'
+    end
+
     get '/album-info' do
       response.headers['Content-Type'] = 'application/json'
       serialize_album(Spotify.getAlbumInfo(params[:uri])).to_json
