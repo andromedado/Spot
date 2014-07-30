@@ -187,7 +187,7 @@ module Spot
       send_file img, :disposition => 'inline'
     end
 
-    get '/now/playing' do
+    get %r{^/now/playing/} do
       content_type 'image/png'
       img = Player.artwork
       send_file img, :disposition => 'inline'
