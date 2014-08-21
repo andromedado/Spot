@@ -28,7 +28,7 @@ module Spot
       `./script/pause`
       "Everything is paused."
     end
-    
+
     def self.next
       `./script/next`
       "Onwards! #{self.playing}"
@@ -38,7 +38,7 @@ module Spot
       `./script/back`
       "Let's hear it again! #{self.playing}"
     end
-    
+
     def self.mute
       `./script/mute`
       'Shhh...'
@@ -48,7 +48,7 @@ module Spot
       vol = `./script/get-volume`.gsub /(?<!\n)\n(?!\n)/, ''
       vol.to_i
     end
-    
+
     def self.how_much_longer
       `./script/how-much-longer`
     end
@@ -109,6 +109,22 @@ module Spot
 
     def self.dale
       `open /Users/admin/bigboard/damnitdale.app`
+    end
+
+    def self.mothraqa
+      `open /Users/admin/bigboard/mothra-qa.app`
+    end
+
+    def self.mothradev
+      `open /Users/admin/bigboard/mothra-dev.app`
+    end
+
+    def self.mothradevstable
+      `open /Users/admin/bigboard/mothra-dev-stable.app`
+    end
+
+    def self.mothrastage
+      `open /Users/admin/bigboard/mothra-stage.app`
     end
 
   end

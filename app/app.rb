@@ -5,7 +5,7 @@ require 'json'
 
 module Spot
   class App < Sinatra::Base
-    
+
     configure do
       enable :logging
       `./script/boot`
@@ -60,6 +60,22 @@ module Spot
       Player.dale
     end
 
+    get '/mothra-qa' do
+      Player.mothraqa
+    end
+
+    get '/mothra-dev' do
+      Player.mothradev
+    end
+
+    get '/mothra-dev-stable' do
+      Player.mothradevstable
+    end
+
+    get '/mothra-stage' do
+      Player.mothrastage
+    end
+
     put '/play' do
       Player.volume = 45
       Player.play
@@ -104,13 +120,13 @@ module Spot
     end
 
     post '/find' do
-      query = params[:q]  
+      query = params[:q]
       track_uri = Spotify.find(query)
-      if track_uri.nil? 
+      if track_uri.nil?
         "What the hell is you talkin' 'bout?"
       else
         Player.play_song(track_uri)
-      end 
+      end
     end
 
     post '/play-uri' do
@@ -212,7 +228,7 @@ module Spot
           })
         else
           if defined? album.artists and album.artists.length > 0
-            album.artists.each {|artist| 
+            album.artists.each {|artist|
               artists.push({
               'name' => artist.name,
               'uri' => artist.uri
@@ -245,7 +261,7 @@ module Spot
           })
         else
           if defined? track.artists and track.artists.length > 0
-            track.artists.each {|artist| 
+            track.artists.each {|artist|
               artists.push({
               'name' => artist.name,
               'uri' => artist.uri
@@ -296,6 +312,6 @@ module Spot
           current_volume*0.1
         end
       end
-      
+
   end
 end
