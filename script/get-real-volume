@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# Returns OS volume.
+
+osascript << APPLESCRIPT
+output volume of (get volume settings)
+APPLESCRIPT

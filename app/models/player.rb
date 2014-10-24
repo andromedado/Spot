@@ -49,6 +49,11 @@ module Spot
       vol.to_i
     end
 
+    def self.osVolume
+      vol = `./script/get-real-volume`.gsub /(?<!\n)\n(?!\n)/, ''
+      vol.to_i
+    end
+
     def self.how_much_longer
       `./script/how-much-longer`
     end
@@ -56,6 +61,12 @@ module Spot
     def self.volume=(vol)
       vol+=1
       `./script/set-volume #{vol}`
+      vol
+    end
+
+    def self.osVolume=(vol)
+      vol+=1
+      `./script/set-real-volume #{vol}`
       vol
     end
 

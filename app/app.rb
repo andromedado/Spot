@@ -109,6 +109,14 @@ module Spot
       Player.volume = params[:volume].to_i and Player.volume.to_s unless params[:volume].nil?
     end
 
+    get '/osVolume' do
+      Player.osVolume.to_s
+    end
+
+    put  '/osVolume' do
+      Player.osVolume = params[:volume].to_i and Player.volume.to_s unless params[:volume].nil?
+    end
+
     put '/bumpup' do
       Player.volume = bump_up_volume.to_i
       Player.volume.to_s
