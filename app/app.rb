@@ -5,7 +5,7 @@ require 'json'
 
 module Spot
   class App < Sinatra::Base
-    
+
     configure do
       enable :logging
       `./script/boot`
@@ -18,6 +18,62 @@ module Spot
     put '/say' do
       what = params[:what]
       Player.say(what)
+    end
+
+    get '/shipit' do
+      Player.shipit
+    end
+
+    get '/shipit-adminv1' do
+      Player.shipitadminv1
+    end
+
+    get '/shipit-adminv2' do
+      Player.shipitadminv2
+    end
+
+    get '/shipit-inventory' do
+      Player.shipitinventory
+    end
+
+    get '/shipit-identity' do
+      Player.shipitidentity
+    end
+
+    get '/shipit-ecom' do
+      Player.shipitecom
+    end
+
+    get '/shipit-cms' do
+      Player.shipitcms
+    end
+
+    get '/shipit-usercomm' do
+      Player.shipitusercomm
+    end
+
+    get '/shipit-query' do
+      Player.shipitquery
+    end
+
+    get '/damnit-dale' do
+      Player.dale
+    end
+
+    get '/mothra-qa' do
+      Player.mothraqa
+    end
+
+    get '/mothra-dev' do
+      Player.mothradev
+    end
+
+    get '/mothra-dev-stable' do
+      Player.mothradevstable
+    end
+
+    get '/mothra-stage' do
+      Player.mothrastage
     end
 
     put '/play' do
@@ -53,6 +109,14 @@ module Spot
       Player.volume = params[:volume].to_i and Player.volume.to_s unless params[:volume].nil?
     end
 
+    get '/osVolume' do
+      Player.osVolume.to_s
+    end
+
+    put  '/osVolume' do
+      Player.osVolume = params[:volume].to_i and Player.volume.to_s unless params[:volume].nil?
+    end
+
     put '/bumpup' do
       Player.volume = bump_up_volume.to_i
       Player.volume.to_s
@@ -64,13 +128,13 @@ module Spot
     end
 
     post '/find' do
-      query = params[:q]  
+      query = params[:q]
       track_uri = Spotify.find(query)
-      if track_uri.nil? 
+      if track_uri.nil?
         "What the hell is you talkin' 'bout?"
       else
         Player.play_song(track_uri)
-      end 
+      end
     end
 
     post '/play-uri' do
@@ -122,6 +186,14 @@ module Spot
       sprintf("I found:\nTrack: %s\nArtist: %s\nAlbum: %s [%s]\nLength: %s", track_data.name, artist_name, track_data.album.name, track_data.album.released, length)
     end
 
+    get '/seconds-left' do
+      Player.how_much_longer
+    end
+
+    get '/currently-playing' do
+      Player.playingUri
+    end
+
     get '/how-much-longer' do
       secs_str = Player.how_much_longer
       seconds_i = secs_str.to_i
@@ -134,6 +206,12 @@ module Spot
     end
 
     get '/playing.png' do
+      content_type 'image/png'
+      img = Player.artwork
+      send_file img, :disposition => 'inline'
+    end
+
+    get %r{^/now/playing/} do
       content_type 'image/png'
       img = Player.artwork
       send_file img, :disposition => 'inline'
@@ -158,7 +236,7 @@ module Spot
           })
         else
           if defined? album.artists and album.artists.length > 0
-            album.artists.each {|artist| 
+            album.artists.each {|artist|
               artists.push({
               'name' => artist.name,
               'uri' => artist.uri
@@ -191,7 +269,7 @@ module Spot
           })
         else
           if defined? track.artists and track.artists.length > 0
-            track.artists.each {|artist| 
+            track.artists.each {|artist|
               artists.push({
               'name' => artist.name,
               'uri' => artist.uri
@@ -242,6 +320,6 @@ module Spot
           current_volume*0.1
         end
       end
-      
+
   end
 end

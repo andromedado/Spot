@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# Sets OS volume.
+#
+# $1 - The new volume setting.
+
+osascript << APPLESCRIPT
+set volume output volume $1 --100%
+APPLESCRIPT
